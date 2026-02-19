@@ -1,43 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Common.Attributes;
 
 namespace Domain.Common.Enums;
 
-public enum errorCode
+public enum ErrorCode
 {
-    None = 0,              
+    Unknown = -1,
+    [HttpStatusCode(200)]
+    Ok,
 
-    // Ошибки валидации (400 Bad Request)
-    InvalidDataFormat = 1,
-    PasswordTooShort = 2,
-    EmailInvalid = 3,
-    PasswordTooLong = 4,
-    UserNotFound = 5,
-    CoursesNotFound = 6,
-    ChapterNotFound = 7,
-    IpNotFound = 8,
-    
-    ReviewNotFound = 11,
+    //Ошибки валидации (400 Bad Request)
+    [HttpStatusCode(400)]
+    BadRequest,
+    [HttpStatusCode(400)]
+    InvalidPassword,
+    [HttpStatusCode(400)]
+    InvalidUsername,
+    [HttpStatusCode(400)]
+    InvalidUsernameOrPassword,
+    [HttpStatusCode(400)]
+    InvalidPagination,
+    [HttpStatusCode(400)]
+    InvalidGroupName,
+    [HttpStatusCode(400)]
+    InvalidDate,
 
+    //Ошибки авторизации (401 Unauthorized)
+    [HttpStatusCode(401)]
+    Unauthorized,
+    [HttpStatusCode(401)]
+    TokenExpired,
+    [HttpStatusCode(401)]
+    InvalidToken,
 
-    // Бизнес-конфликты (409 Conflict) 
+    //Нет доступа (403 Forbidden)
+    [HttpStatusCode(403)]
+    Forbidden,
 
+    //Не найден (404 Not Found)
+    [HttpStatusCode(404)]
+    NotFound,
+    [HttpStatusCode(404)]
+    UserNotFound,
 
-    // NotFound (404 Not Found)
+    //Ошибки конфликтации (409 Conflict)
+    [HttpStatusCode(409)]
+    Conflict,
+    [HttpStatusCode(409)]
+    UserAlreadyExists,
 
-    // forbidden (403 Forbidden)
-    NoRights = 401,
-
-
-    // Системные ошибки (500 Internal Server Error)
-    DatabaseError = 501,
-    UnknownError = 502,
-    
-    NotFound = 506,
-
-    // timeout (504 Gateway Timeout)
-    TimeoutError = 603,
+    //Ошибка сервера (500 Internal Server Error)
+    [HttpStatusCode(500)]
+    InternalServerError,
+    [HttpStatusCode(500)]
+    DatabaseError,
+    [HttpStatusCode(500)]
+    UnknownError,
+    [HttpStatusCode(500)]
+    TokenGenerationError,
+    [HttpStatusCode(500)]
+    NoPasswordHash,
 }
