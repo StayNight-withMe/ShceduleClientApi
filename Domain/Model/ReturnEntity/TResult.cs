@@ -1,10 +1,10 @@
 ﻿using Domain.Common.Enums;
 
-namespace Domain.Common.Model.ReturnEntity;
+namespace Domain.Model.ReturnEntity;
 
     public abstract class EntityOfTResult
     {
-        public errorCode ErrorCode { get; set; }
+        public ErrorCode ErrorCode { get; set; }
         public bool IsCompleted { get; set; }
     }
 
@@ -14,8 +14,8 @@ namespace Domain.Common.Model.ReturnEntity;
         internal TResult() { }
         public T? Value { get; set; }
         public static TResult<T> CompletedOperation(T value)
-            => new TResult<T> { Value = value, IsCompleted = true, ErrorCode = errorCode.None };
-        public static TResult<T> FailedOperation(errorCode errorCode, string MessageForUser = null)
+            => new TResult<T> { Value = value, IsCompleted = true, ErrorCode = ErrorCode.Ok };
+        public static TResult<T> FailedOperation(ErrorCode errorCode, string MessageForUser = null)
             => new TResult<T> { IsCompleted = false, ErrorCode = errorCode };
 
         public static implicit operator TResult(TResult<T> value)
@@ -28,8 +28,8 @@ namespace Domain.Common.Model.ReturnEntity;
 
     public class TResult : EntityOfTResult
     {
-        public static TResult CompletedOperation() => new TResult { IsCompleted = true, ErrorCode = errorCode.None };
-        public static TResult FailedOperation(errorCode errorCode)
+        public static TResult CompletedOperation() => new TResult { IsCompleted = true, ErrorCode = ErrorCode.Ok };
+        public static TResult FailedOperation(ErrorCode errorCode)
             => new TResult { IsCompleted = false, ErrorCode = errorCode };
 
     }

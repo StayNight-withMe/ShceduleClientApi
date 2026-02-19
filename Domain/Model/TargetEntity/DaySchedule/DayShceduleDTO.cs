@@ -1,6 +1,6 @@
-﻿using Domain.Common.Model.Common.Lesson;
+﻿using Domain.Model.Common.Lesson;
 
-namespace Domain.Common.Model.TargetEntity.DaySchedule;
+namespace Domain.Model.TargetEntity.DaySchedule;
 
 public class DayShceduleDTO
 {
