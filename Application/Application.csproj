@@ -13,12 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Common\Behaviors\" />
-	  <Folder Include="Features\GroupSchedule\Commands\" />
-	  <Folder Include="Features\GroupSchedule\Queries\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
