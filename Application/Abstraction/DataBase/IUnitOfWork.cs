@@ -1,6 +1,6 @@
 ﻿namespace Application.Abstraction.DataBase;
 
-public interface IUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
-    Task<int> CommitAsync();
+    Task<int> CommitAsync(CancellationToken ct = default);
 }
