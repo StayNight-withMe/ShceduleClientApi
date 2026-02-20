@@ -47,7 +47,6 @@ public static class ScheduleEndpoints
             .WithTags("Полное расписание на день")
             .Produces(200)
             .Produces(500)
-            .Produces(400)
             .Produces(429);
 
 
