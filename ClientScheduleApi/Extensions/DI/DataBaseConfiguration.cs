@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Application.Abstraction.DataBase;
+﻿using Application.Abstraction.DataBase;
 using Infrastructure.DataBase.Context;
 using Infrastructure.DataBase.Repository.Base;
 using Infrastructure.DataBase.UnitOfWork;
