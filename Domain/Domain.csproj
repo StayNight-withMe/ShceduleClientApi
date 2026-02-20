@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\Entity\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="9.3.1" />
   </ItemGroup>
 
