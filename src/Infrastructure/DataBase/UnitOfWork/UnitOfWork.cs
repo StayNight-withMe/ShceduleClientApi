@@ -16,13 +16,12 @@ public class UnitOfWork : IUnitOfWork
     {
         try
         {
-           return await _context.SaveChangesAsync(ct);
+            return await _context.SaveChangesAsync(ct);
         }
         catch(DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
         {
             throw new CustomDbException(pgEx.Message, pgEx.SqlState);
         }
-         
     }
     public void Dispose() => _context.Dispose();
 }
