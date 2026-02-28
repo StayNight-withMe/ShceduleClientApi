@@ -1,6 +1,6 @@
-﻿using Domain.Common.Enums;
+﻿//using Domain.Common.Enums;
 
-namespace Domain.Model.Common.Lesson;
+namespace Contracts.Common;
 
 public class Lesson
 {
@@ -12,5 +12,5 @@ public class Lesson
     public string Fio2 { get; set; }
     public string ClassRoom1 { get; set; }
     public string ClassRoom2 { get; set; }
-    public durationState DurationState { get; set; }
+    //public durationState DurationState { get; set; }
 }
