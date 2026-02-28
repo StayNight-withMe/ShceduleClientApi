@@ -13,7 +13,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 
-builder.Services.AddCustomService();
+builder.Services.AddCustomService(builder.Configuration);
 
 
 builder.Services.AddDataBaseDependency(builder.Configuration);
