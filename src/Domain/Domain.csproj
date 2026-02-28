@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="9.3.1" />
+    <PackageReference Include="MassTransit.Abstractions" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\Common\Lesson\" />
   </ItemGroup>
 
 </Project>
