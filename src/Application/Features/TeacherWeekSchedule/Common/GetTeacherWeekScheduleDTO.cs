@@ -1,8 +1,8 @@
 ﻿
-using Domain.Model.TargetEntity.DaySchedule;
+using Contracts.Schedules;
 
 namespace Application.Features.TeacherSchedule.Common;
 public class GetTeacherWeekScheduleDTO
 {
-    public List<DayShceduleDTO> Shcedule { get; set; }
+    public List<DayScheduleDTO> Shcedule { get; set; }
 }
