@@ -11,6 +11,7 @@ public class ScheduleUpdateConsumer : IConsumer<DayScheduleDTO>
 
     public async Task Consume(ConsumeContext<DayScheduleDTO> context)
     {
+        Console.WriteLine("консум client");
         await _mediator.Send(context.Message); 
     }
 }
