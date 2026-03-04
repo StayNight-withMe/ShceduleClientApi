@@ -1,29 +1,20 @@
 ﻿
 using Contracts.Schedules;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Features.ScheduleSave;
 public class ScheduleSaveHandler : IRequestHandler<DayScheduleDTO>
 {
+    public readonly ILogger<ScheduleSaveHandler> _logger;
+    public ScheduleSaveHandler(ILogger<ScheduleSaveHandler> logger)
+    {
+        _logger = logger;
+    }
+
     public Task Handle(DayScheduleDTO request, CancellationToken cancellationToken)
     {
-        Console.WriteLine(request.Date);
-        Console.WriteLine(request.Group);
-
-        foreach (var i in request.Lessons)
-        {
-         Console.WriteLine($"{i.Lesson1}");
-         Console.WriteLine($"{i.Lesson2}");
-         Console.WriteLine($"{i.ClassRoom1}");
-         Console.WriteLine($"{i.ClassRoom2}");
-         Console.WriteLine($"{i.Fio1}");
-         Console.WriteLine($"{i.Fio2}");
-         Console.WriteLine($"{i.Lesson1}");
-         Console.WriteLine($"{i.Lesson2}");
-        }
-
+        _logger.LogInformation("broker continue");
         return Task.CompletedTask;
-
-
     }
 }
