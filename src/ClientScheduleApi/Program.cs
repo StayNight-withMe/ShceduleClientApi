@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddCustomService(builder.Configuration);
 
+builder.Services.AddMessaging();
 
 builder.Services.AddDataBaseDependency(builder.Configuration);
 
@@ -29,6 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapCustomRoute();
+
 
 
 app.UseHttpsRedirection();
