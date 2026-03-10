@@ -1,13 +1,14 @@
 ﻿using Application;
 using Application.Common.Behaviors;
 using FluentValidation;
+using MassTransit;
 using MediatR;
 
 namespace ClientScheduleApi.Extensions.DI;
 
 public static class ServiceConfigurationExtensions
 {
-    public static IServiceCollection AddCustomService(this IServiceCollection services)
+    public static IServiceCollection AddCustomService(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHttpContextAccessor();
 
@@ -18,10 +19,8 @@ public static class ServiceConfigurationExtensions
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         });
 
-        // FluentValidation
-        services.AddValidatorsFromAssemblyContaining<AssemblyMarker>();
-
-
+     
+       
 
         return services;
     }
