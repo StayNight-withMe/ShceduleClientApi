@@ -16,6 +16,7 @@ public class LessonEntity
     public string Classroom2 { get; set; }
     public TimeOnly StartTime { get; set; }
     public TimeOnly EndTime { get; set; }
+    public int LessonNumber { get; set; }
 
     [ForeignKey(nameof(Groupid))]
     public DayScheduleEntity daySchedule { get; set; }
