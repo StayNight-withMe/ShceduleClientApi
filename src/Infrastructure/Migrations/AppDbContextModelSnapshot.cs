@@ -24,14 +24,20 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Model.Entities.GroupEntity", b =>
                 {
-                    b.Property<Guid>("SpecialtyId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("SpecialtyId");
+                    b.Property<Guid>("SpecialtyId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialtyId");
 
                     b.ToTable("Group");
                 });
@@ -58,7 +64,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateOnly>("Date")
-                        .HasColumnType("Date");
+                        .HasColumnType("date");
 
                     b.Property<string>("GroupName")
                         .IsRequired()
