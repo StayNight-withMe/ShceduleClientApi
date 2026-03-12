@@ -7,8 +7,11 @@ using MediatR;
 namespace Application.Features.AllGroup.Queries;
 public class GetAllGroupHandler : IRequestHandler<GetAllGroupQuery, TResult<Dictionary<string, List<string>>>>
 {
-    public readonly IBaseRepository<GroupEntity> _groupRepo;
-    public GetAllGroupHandler(IBaseRepository<GroupEntity> groupRepo)
+    public readonly ICommonInfoRepository _groupRepo;
+
+    
+
+    public GetAllGroupHandler(ICommonInfoRepository groupRepo)
     {
         _groupRepo = groupRepo;
     }
@@ -17,18 +20,17 @@ public class GetAllGroupHandler : IRequestHandler<GetAllGroupQuery, TResult<Dict
         GetAllGroupQuery request,
         CancellationToken ct = default) 
     {
-        var dtoS = await _groupRepo.ListAsync(new AllGroupSpec());
+        var result = await _groupRepo.GetAllGroup();
 
-        var result =  dtoS.ToDictionary(c => c.Speciality.Name, c => new List<string>());
 
-        foreach(var item in result)
+        foreach (var item in result)
         {
             Console.WriteLine("итерация");
             Console.WriteLine(item.Key);
             Console.WriteLine(item.Value);
         }
 
-        return TResult<Dictionary<string, List<string>>>.CompletedOperation(null);
+        return TResult<Dictionary<string, List<string>>>.CompletedOperation(result);
     }
 
 }
