@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.DataBase;
 using Infrastructure.DataBase.Context;
 using Infrastructure.DataBase.Repository.Base;
+using Infrastructure.DataBase.Repository.Custom;
 using Infrastructure.DataBase.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ public static class DataBaseConfiguration
 
         // Repository
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+        services.AddScoped(typeof(ICommonInfoRepository), typeof(CommonInfoRepository));
 
         return services;
     }
