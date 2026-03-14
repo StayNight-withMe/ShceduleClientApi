@@ -12,14 +12,15 @@ public static class DataEndpoints
     {
         var group = app
             .MapGroup("/api/data")
+            .RequireRateLimiting("DefaultLimiter")
             .WithTags("Общие данные")
-             .WithDescription("получение общих данных");
+            .WithDescription("получение общих данных");
 
         group.MapGet("/teachers", GetAllTeachers)
             .WithTags("Все преподаватели");
 
         group.MapGet("/groups", GetAllGroups)
-           .WithTags("Все группы");
+            .WithTags("Все группы");
 
         return group;
     }
