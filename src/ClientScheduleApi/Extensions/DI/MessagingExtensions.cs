@@ -18,8 +18,12 @@ public static class MessagingExtensions
 
                 cfg.ReceiveEndpoint("client-lesson-updates", e =>
                 {
+                    e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+
                     e.ConfigureConsumer<ScheduleUpdateConsumer>(context);
                 });
+
+                
             });
         });
 
