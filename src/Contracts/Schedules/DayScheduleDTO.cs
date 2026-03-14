@@ -1,6 +1,4 @@
-﻿
-
-using Contracts.Common;
+﻿using Contracts.Common;
 using MediatR;
 
 namespace Contracts.Schedules;
