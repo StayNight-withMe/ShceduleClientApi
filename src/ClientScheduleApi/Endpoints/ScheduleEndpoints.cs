@@ -11,6 +11,7 @@ public static class ScheduleEndpoints
     public static IEndpointRouteBuilder ScheduleService(this IEndpointRouteBuilder builder)
     {
         var group = builder.MapGroup("Schedule")
+            .RequireRateLimiting("DefaultLimiter")
             .WithDescription("Получение расписания");
 
 
