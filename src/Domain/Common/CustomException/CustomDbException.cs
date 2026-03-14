@@ -5,7 +5,7 @@ public class CustomDbException : Exception
 
     public string SqlState { get; set; }
 
-    public CustomDbException(string message, string sqlState)
+    public CustomDbException(string message, string sqlState) : base(message)
     {
         ErrorMessage = message;
         SqlState = sqlState;
