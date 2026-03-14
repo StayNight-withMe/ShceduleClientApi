@@ -61,7 +61,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                        .HasColumnType("Date");
 
                     b.Property<string>("GroupName")
                         .IsRequired()
