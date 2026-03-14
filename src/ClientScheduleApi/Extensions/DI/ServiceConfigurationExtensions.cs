@@ -19,8 +19,8 @@ public static class ServiceConfigurationExtensions
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         });
 
-     
-       
+        services.AddAutoMapper(typeof(AssemblyMarker));
+
 
         return services;
     }
