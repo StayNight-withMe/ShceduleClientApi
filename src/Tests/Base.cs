@@ -3,7 +3,10 @@ using System;
 using System.Threading.Tasks;
 using Application.Abstraction.DataBase;
 using Application.Features.AllGroup.Queries;
+using Application.Features.AllTeacher.Queries;
+using Domain.Model.Entity;
 using Infrastructure.DataBase.Context;
+using Infrastructure.DataBase.Repository.Base;
 using Infrastructure.DataBase.Repository.Custom;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -27,13 +30,17 @@ public abstract class IntegrationTestBase : IAsyncLifetime
         _dbContext.Database.EnsureCreated();
     }
 
-    // 🔥 Только репозиторий — никакого Mediator!
     protected ICommonInfoRepository GetCommonRepo() =>
         new CommonInfoRepository(_dbContext);
 
-    // 🔥 Хендлер создаём напрямую
+    protected IBaseRepository<TeacherEntity> GetTeacherRepo() =>
+        new BaseRepository<TeacherEntity>(_dbContext);
+
     protected GetAllGroupHandler CreateHandler() =>
         new GetAllGroupHandler(GetCommonRepo());
+
+    protected GetAllTeacherHandler CreateTeacherHandler() =>
+        new GetAllTeacherHandler(GetTeacherRepo());
 
     public Task InitializeAsync() => Task.CompletedTask;
 
