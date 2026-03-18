@@ -9,30 +9,49 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
     where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
-
     public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators;
     }
-
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken ct)
+    public async Task<TResponse> Handle(
+        TRequest request,
+        RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken
+    )
     {
-        if (_validators.Any())
+        if (!_validators.Any())
+            return await next();
+
+        var context = new ValidationContext<TRequest>(request);
+        var validationResults = await Task.WhenAll(
+            _validators.Select(v => v.ValidateAsync(context, cancellationToken))
+        );
+
+        var failures = validationResults
+            .SelectMany(r => r.Errors)
+            .Where(f => f != null)
+            .ToList();
+
+        if (!failures.Any())
+            return await next();
+
+        Dictionary<string, string> details = new();
+        failures.ForEach(f => details.Add(f.CustomState?.ToString() ?? "Unknown", f.ErrorMessage));
+
+        var mainError = failures.First();
+        var errorCode = mainError.CustomState as ErrorCode?
+            ?? ErrorCode.BadRequest;
+
+        string errorMessage = mainError.ErrorMessage;
+
+        if (typeof(TResponse).IsGenericType &&
+            typeof(TResponse).GetGenericTypeDefinition() == typeof(TResult<>))
         {
-            var context = new ValidationContext<TRequest>(request);
-            var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, ct)));
-            var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
-            var mainError = failures.First();
-            string errorMessage = mainError.ErrorMessage;
-            if (typeof(TResponse).IsGenericType &&
-           typeof(TResponse).GetGenericTypeDefinition() == typeof(TResult<>))
-            {
-                return (TResponse)typeof(TResponse)
-                    .GetMethod(nameof(TResult.FailedOperation))!
-                    .Invoke(null, new object[] { ErrorCode.BadRequest, errorMessage })!;
-            }
-            return (TResponse)(object)TResult.FailedOperation(ErrorCode.BadRequest);
+            return (TResponse)typeof(TResponse)
+                .GetMethod(nameof(TResult.FailedOperation))!
+                .Invoke(null, new object[] { errorCode, errorMessage, details })!;
         }
-        return await next();
+
+        return (TResponse)(object)TResult.FailedOperation(errorCode, errorMessage, details);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.Common.Attributes;
+using Domain.Common.Enums;
 using Domain.Model.ReturnEntity;
 
 namespace ClientScheduleApi.Extensions.Other;
@@ -7,24 +8,21 @@ public static class ResultExtensions
 {
     public static IResult ToApiResult(this EntityOfTResult result)
     {
-    
         int statusCode = HttpStatusCodeAttribute.GetHttpStatusCode(result.ErrorCode);
-        //var body = new
-        //{
-        //    error = Enum.GetName(typeof(ErrorCode), result.Error.Value) ?? "Unknown",
-        //    message = result.Message,
-        //    details = result.Details
-        //};
+        var body = new
+        {
+            error = Enum.GetName(typeof(ErrorCode), result.ErrorCode) ?? "Unknown",
+            message = result.Message,
+            details = result.Details
+        };
 
         return statusCode switch
         {
             200 => Results.Ok(),
-            400 => Results.BadRequest(),
-            401 => Results.Unauthorized(),
-            403 => Results.Forbid(),
-            404 => Results.NotFound(),
-            409 => Results.Conflict(),
-            _ => Results.Json(statusCode),
+            400 => Results.BadRequest(body),
+            404 => Results.NotFound(body),
+            409 => Results.Conflict(body),
+            _ => Results.Json(body, statusCode: statusCode),
         };
     }
 
