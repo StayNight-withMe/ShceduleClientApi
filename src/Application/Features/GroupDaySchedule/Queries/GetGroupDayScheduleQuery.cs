@@ -4,4 +4,7 @@ using MediatR;
 
 namespace Application.Features.TeacherSchedule.Queries;
 
-public record GetGroupDayScheduleQuery(string GroupName) : IRequest<TResult<GetGroupDayScheduleDTO>>;
+public record GetGroupDayScheduleQuery(
+    string GroupName,
+    DateOnly Day
+) : IRequest<TResult<GetGroupDayScheduleDTO>>;
