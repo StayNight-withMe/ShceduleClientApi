@@ -1,5 +1,4 @@
-﻿
-using Application.Abstraction.DataBase;
+﻿using Application.Abstraction.DataBase;
 using Ardalis.Specification;
 using Domain.Model.Entities;
 using Infrastructure.DataBase.Context;
@@ -12,7 +11,7 @@ public class CommonInfoRepository : BaseRepository<GroupEntity>, ICommonInfoRepo
 {
     public CommonInfoRepository(AppDbContext AppDbContext) : base(AppDbContext) { }
 
-    public async Task<Dictionary<string, List<string>>> GetAllGroup() 
+    public async Task<Dictionary<string, List<string>>> GetAllGroup()
     {
 
         return await DbContext.Set<GroupEntity>()
@@ -26,9 +25,5 @@ public class CommonInfoRepository : BaseRepository<GroupEntity>, ICommonInfoRepo
                 GroupNames = c.Select(x => x.Name).ToList()
             })
             .ToDictionaryAsync(c => c.SpecName, x => x.GroupNames);
-
-        
     }
-
-
 }

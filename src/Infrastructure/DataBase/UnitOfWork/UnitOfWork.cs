@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace Infrastructure.DataBase.UnitOfWork;
+
 public class UnitOfWork : IUnitOfWork
 {
     public AppDbContext _context;
@@ -18,7 +19,7 @@ public class UnitOfWork : IUnitOfWork
         {
             return await _context.SaveChangesAsync(ct);
         }
-        catch(DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
+        catch (DbUpdateException ex) when (ex.InnerException is PostgresException pgEx)
         {
             throw new CustomDbException(pgEx.Message, pgEx.SqlState);
         }
