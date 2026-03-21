@@ -1,6 +1,4 @@
-﻿
-
-using Domain.Model.ReturnEntity;
+﻿using Domain.Model.ReturnEntity;
 using MediatR;
 
 namespace Application.Features.AllGroup.Queries;

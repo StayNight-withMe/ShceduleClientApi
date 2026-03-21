@@ -7,16 +7,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Features.ScheduleSave;
+
 public class ScheduleSaveHandler : IRequestHandler<DayScheduleDTO>
 {
     private readonly ILogger<ScheduleSaveHandler> _logger;
-
     private readonly IBaseRepository<DayScheduleEntity> _dayScheduleRepository;
-
     private readonly IBaseRepository<LessonEntity> _lessonEntityRepository;
-
     private readonly IMapper _mapper;
-
     private readonly IUnitOfWork _unitOfWork;
 
     public ScheduleSaveHandler(
@@ -52,13 +49,12 @@ public class ScheduleSaveHandler : IRequestHandler<DayScheduleDTO>
 
         try
         {
-          await _unitOfWork.CommitAsync(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
         }
-        catch (CustomDbException ex) 
+        catch (CustomDbException ex)
         {
             _logger.LogError(ex, "message to broker");
             throw;
         }
-
     }
 }

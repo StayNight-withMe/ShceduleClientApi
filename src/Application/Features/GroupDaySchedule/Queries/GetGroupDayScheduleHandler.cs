@@ -1,5 +1,4 @@
-﻿
-using Application.Abstraction.DataBase;
+﻿using Application.Abstraction.DataBase;
 using Application.Features.TeacherSchedule.Common;
 using AutoMapper;
 using Contracts.Common;
@@ -11,6 +10,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Features.TeacherSchedule.Queries;
+
 public class GetGroupDayScheduleHandler : IRequestHandler<GetGroupDayScheduleQuery, TResult<GetGroupDayScheduleDTO>>
 {
     public readonly ILogger<GetGroupDayScheduleHandler> _logger;
@@ -29,7 +29,6 @@ public class GetGroupDayScheduleHandler : IRequestHandler<GetGroupDayScheduleQue
         _mapper = mapper;
     }
 
-
     public async Task<TResult<GetGroupDayScheduleDTO>> Handle(GetGroupDayScheduleQuery request, CancellationToken cancellationToken)
     {
         var lessons = await _lessonRepo.ListAsync(new LessonsByGroupAndDateSpec(request.GroupName, request.Day));
@@ -39,7 +38,8 @@ public class GetGroupDayScheduleHandler : IRequestHandler<GetGroupDayScheduleQue
         var daySchedule = lessons.First().daySchedule;
         var mappedDaySchedule = _mapper.Map<DayScheduleDTO>(daySchedule);
 
-        return TResult<GetGroupDayScheduleDTO>.CompletedOperation(new GetGroupDayScheduleDTO {
+        return TResult<GetGroupDayScheduleDTO>.CompletedOperation(new GetGroupDayScheduleDTO
+        {
             Shcedule = mappedDaySchedule
         });
     }

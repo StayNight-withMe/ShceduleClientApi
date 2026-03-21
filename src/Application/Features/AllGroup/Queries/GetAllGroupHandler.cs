@@ -1,15 +1,12 @@
 ﻿using Application.Abstraction.DataBase;
-using Domain.Model.Entities;
 using Domain.Model.ReturnEntity;
-using Domain.Specification;
 using MediatR;
 
 namespace Application.Features.AllGroup.Queries;
+
 public class GetAllGroupHandler : IRequestHandler<GetAllGroupQuery, TResult<Dictionary<string, List<string>>>>
 {
     public readonly ICommonInfoRepository _groupRepo;
-
-    
 
     public GetAllGroupHandler(ICommonInfoRepository groupRepo)
     {
@@ -18,10 +15,9 @@ public class GetAllGroupHandler : IRequestHandler<GetAllGroupQuery, TResult<Dict
 
     public async Task<TResult<Dictionary<string, List<string>>>> Handle(
         GetAllGroupQuery request,
-        CancellationToken ct = default) 
+        CancellationToken ct = default)
     {
         var result = await _groupRepo.GetAllGroup();
-
 
         foreach (var item in result)
         {
@@ -32,6 +28,4 @@ public class GetAllGroupHandler : IRequestHandler<GetAllGroupQuery, TResult<Dict
 
         return TResult<Dictionary<string, List<string>>>.CompletedOperation(result);
     }
-
 }
-

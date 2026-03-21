@@ -1,6 +1,6 @@
-﻿
+﻿namespace Application.Features.ScheduleSave;
 
-namespace Application.Features.ScheduleSave;
-internal class ScheduleSaveValidator
+public class ScheduleSaveValidator
 {
+    
 }

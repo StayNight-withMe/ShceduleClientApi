@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Common.Messaging;
+
 public class ScheduleUpdateConsumer : IConsumer<DayScheduleDTO>
 {
     private readonly ISender _mediator;

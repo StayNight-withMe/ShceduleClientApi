@@ -1,8 +1,8 @@
-﻿
-using Domain.Common.Enums;
+﻿using Domain.Common.Enums;
 using FluentValidation;
 
 namespace Application.Features.TeacherSchedule.Queries;
+
 public class GetGroupDayScheduleValidator : AbstractValidator<GetGroupDayScheduleQuery>
 {
     public GetGroupDayScheduleValidator()

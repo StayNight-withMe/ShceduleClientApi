@@ -6,6 +6,7 @@ using Domain.Specification;
 using MediatR;
 
 namespace Application.Features.AllTeacher.Queries;
+
 public class GetAllTeacherHandler : IRequestHandler<GetAllTeacherQuery, TResult<List<string>>>
 {
     private readonly IBaseRepository<TeacherEntity> _teacherRepository;

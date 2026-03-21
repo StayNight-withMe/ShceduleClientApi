@@ -9,7 +9,6 @@ public class CommonProfile : Profile
 {
     public CommonProfile()
     {
-
         CreateMap<DayScheduleDTO, DayScheduleEntity>()
             .ForMember(
             c => c.GroupName,
@@ -21,7 +20,6 @@ public class CommonProfile : Profile
         CreateMap<DayScheduleDTO, List<LessonEntity>>()
             .ConvertUsing((src, dest, context) =>
                 context.Mapper.Map<List<LessonEntity>>(src.Lessons));
-    
 
         CreateMap<Lesson, LessonEntity>();
         CreateMap<LessonEntity, Lesson>();

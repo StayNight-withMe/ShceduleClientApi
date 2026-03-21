@@ -1,3 +1,6 @@
-﻿
-namespace Application;
-public class AssemblyMarker { }
+﻿namespace Application;
+
+public class AssemblyMarker
+{
+    
+}

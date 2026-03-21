@@ -1,6 +1,4 @@
-﻿
-
-using Domain.Model.Entities;
+﻿using Domain.Model.Entities;
 
 namespace Application.Abstraction.DataBase;
 
