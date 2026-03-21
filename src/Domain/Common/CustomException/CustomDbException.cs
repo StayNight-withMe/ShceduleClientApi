@@ -2,7 +2,6 @@
 public class CustomDbException : Exception
 {
     public string ErrorMessage { get; set; }
-
     public string SqlState { get; set; }
 
     public CustomDbException(string message, string sqlState) : base(message)
@@ -10,5 +9,4 @@ public class CustomDbException : Exception
         ErrorMessage = message;
         SqlState = sqlState;
     }
-
 }

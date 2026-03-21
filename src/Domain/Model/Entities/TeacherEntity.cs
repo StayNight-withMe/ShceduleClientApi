@@ -1,10 +1,10 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Model.Entity;
+
 public class TeacherEntity
 {
     [Key]
-    public Guid Id { get; set; }
-    public string FullName { get; set; }
+    public Guid Id { get; set; } = default!;
+    public string FullName { get; set; } = default!;
 }

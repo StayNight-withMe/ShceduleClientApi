@@ -1,8 +1,6 @@
-﻿
-using Domain.Common.Enums;
+﻿using Domain.Common.Enums;
 
 namespace Domain.Common.Attributes;
-
 
 [AttributeUsage(AttributeTargets.Field)]
 public class HttpStatusCodeAttribute : Attribute

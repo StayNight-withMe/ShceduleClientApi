@@ -10,7 +10,6 @@ public abstract class EntityOfTResult
     public Dictionary<string, string>? Details { get; set; }
 }
 
-
 public class TResult<T> : EntityOfTResult
 {
     internal TResult() { }
@@ -27,7 +26,6 @@ public class TResult<T> : EntityOfTResult
 
 }
 
-
 public class TResult : EntityOfTResult
 {
     public static TResult CompletedOperation() => new TResult { IsCompleted = true, ErrorCode = ErrorCode.Ok };
@@ -35,4 +33,3 @@ public class TResult : EntityOfTResult
         => new TResult { IsCompleted = false, ErrorCode = errorCode, Message = message, Details = details };
 
 }
-

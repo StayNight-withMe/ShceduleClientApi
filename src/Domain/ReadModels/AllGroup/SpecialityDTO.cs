@@ -1,8 +1,6 @@
-﻿
-namespace Domain.ReadModels.AllGroup;
+﻿namespace Domain.ReadModels.AllGroup;
+
 public class SpecialityDTO
 {
-    public string Name { get; set; }
-      
-    
+    public string Name { get; set; } = default!;
 }
