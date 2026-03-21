@@ -1,4 +1,5 @@
-﻿using Application.Features.TeacherSchedule.Queries;
+﻿using Application.Features.GroupWeekSchedule.Queries;
+using Application.Features.TeacherSchedule.Queries;
 using ClientScheduleApi.Extensions.Other;
 using Contracts.Schedules;
 using MediatR;
@@ -14,7 +15,6 @@ public static class ScheduleEndpoints
             .RequireRateLimiting("DefaultLimiter")
             .WithDescription("Получение расписания");
 
-
         group.MapGet("/teacher/week", GetTeacherWeekSchedule)
             .WithTags("Расписание преподавателя на след N дней")
             .Produces<List<DayScheduleDTO>>(200)
@@ -29,14 +29,12 @@ public static class ScheduleEndpoints
             .Produces(400)
             .Produces(429);
 
-
         group.MapGet("/group/day", GetGroupDaySchedule)
             .WithTags("Расписания группы на конкретный день")
             .Produces<DayScheduleDTO>(200)
             .Produces(500)
             .Produces(400)
             .Produces(429);
-
 
         group.MapGet("/group/week", GetGroupWeekSchedule)
             .WithTags("Расписание группы на след N дней")
@@ -57,11 +55,10 @@ public static class ScheduleEndpoints
         return group;
     }
 
-
     public static async Task<IResult> GetTeacherWeekSchedule(
-        [FromServices]Mediator mediatR,
+        [FromServices] Mediator mediatR,
         [AsParameters] GetTeacherWeekScheduleQuery query
-        )
+    )
     {
         var result = await mediatR.Send(query);
 
@@ -79,17 +76,15 @@ public static class ScheduleEndpoints
         return result.ToApiResult();
     }
 
-
     public static async Task<IResult> GetGroupDaySchedule(
         [FromServices] Mediator mediatR,
         [AsParameters] GetGroupDayScheduleQuery query
-)
+    )
     {
         var result = await mediatR.Send(query);
 
         return result.ToApiResult();
     }
-
 
     public static async Task<IResult> GetGroupWeekSchedule(
         [FromServices] Mediator mediatR,
@@ -105,11 +100,10 @@ public static class ScheduleEndpoints
     public static async Task<IResult> GetFullSchedule(
         [FromServices] Mediator mediatR,
         [AsParameters] GetFullWeekScheduleQuery query
-        )
+    )
     {
         var result = await mediatR.Send(query);
 
         return result.ToApiResult();
     }
-
 }

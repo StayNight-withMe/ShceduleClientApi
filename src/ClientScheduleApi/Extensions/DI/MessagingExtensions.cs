@@ -9,7 +9,6 @@ public static class MessagingExtensions
     {
         services.AddMassTransit(x =>
         {
-  
             x.AddConsumer<ScheduleUpdateConsumer>();
 
             x.UsingRabbitMq((context, cfg) =>
@@ -23,12 +22,10 @@ public static class MessagingExtensions
                     e.ConfigureConsumer<ScheduleUpdateConsumer>(context);
                 });
 
-                
             });
         });
 
         return services;
     }
-
 }
 

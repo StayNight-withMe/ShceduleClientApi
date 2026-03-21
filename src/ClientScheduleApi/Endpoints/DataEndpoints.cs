@@ -25,25 +25,21 @@ public static class DataEndpoints
         return group;
     }
 
-
-
     public static async Task<IResult> GetAllTeachers(
-        [FromServices]IMediator mediator
-        )
+        [FromServices] IMediator mediator
+    )
     {
         var result = await mediator.Send(new GetAllTeacherQuery());
 
         return result.ToApiResult();
     }
 
-
     public static async Task<IResult> GetAllGroups(
-        [FromServices]IMediator mediator
-        )
+        [FromServices] IMediator mediator
+    )
     {
         var result = await mediator.Send(new GetAllGroupQuery());
 
         return result.ToApiResult();
     }
-
 }

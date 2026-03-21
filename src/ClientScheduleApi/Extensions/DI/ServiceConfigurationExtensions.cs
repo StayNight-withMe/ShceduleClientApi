@@ -1,7 +1,5 @@
 ﻿using Application;
 using Application.Common.Behaviors;
-using FluentValidation;
-using MassTransit;
 using MediatR;
 using Web.Extensions.Other;
 
@@ -23,7 +21,6 @@ public static class ServiceConfigurationExtensions
         });
 
         services.AddAutoMapper(typeof(AssemblyMarker));
-
 
         return services;
     }
