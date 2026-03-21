@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.Features.GroupWeekSchedule.Queries;
 
-public record GetGroupWeekScheduleQuery(string GroupName, DateOnly date) : IRequest<TResult<GetGroupWeekScheduleDTO>>;
+public record GetGroupWeekScheduleQuery(string GroupName, DateOnly Date) : IRequest<TResult<GetGroupWeekScheduleDTO>>;
