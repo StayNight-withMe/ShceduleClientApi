@@ -15,11 +15,10 @@ public class GetAllGroupHandlerTests : IntegrationTestBase
         _dbContext.Specialty.AddRange(specialty1, specialty2);
         await _dbContext.SaveChangesAsync();
 
-        
         var groups = new List<GroupEntity>
         {
-            new() { Name = "П32", SpecialtyId = specialty1.Id },   
-            new() { Name = "П33", SpecialtyId = specialty1.Id },   
+            new() { Name = "П32", SpecialtyId = specialty1.Id },
+            new() { Name = "П33", SpecialtyId = specialty1.Id },
             new() { Name = "П12", SpecialtyId = specialty2.Id },
         };
 
@@ -36,14 +35,12 @@ public class GetAllGroupHandlerTests : IntegrationTestBase
         Assert.NotNull(response.Value);
         Assert.Equal(2, response.Value.Count);
 
-        
         Assert.Contains("РИСПОИС", response.Value.Keys);
         var rispoisGroups = response.Value["РИСПОИС"];
         Assert.Equal(2, rispoisGroups.Count);
-        Assert.Contains("П32", rispoisGroups);  
-        Assert.Contains("П33", rispoisGroups);  
+        Assert.Contains("П32", rispoisGroups);
+        Assert.Contains("П33", rispoisGroups);
 
-        
         Assert.Contains("ПОИТ", response.Value.Keys);
         var poitGroups = response.Value["ПОИТ"];
         Assert.Single(poitGroups);
@@ -56,7 +53,7 @@ public class GetAllGroupHandlerTests : IntegrationTestBase
         // ARRANGE
 
         // ACT 
-        var handler = CreateHandler();  
+        var handler = CreateHandler();
         var response = await handler.Handle(new GetAllGroupQuery(), CancellationToken.None);
 
         // ASSERT 
@@ -106,7 +103,8 @@ public class GetAllGroupHandlerTests : IntegrationTestBase
 
         // ASSERT 
         Assert.True(response.IsCompleted);
-        Assert.Equal(1, response.Value.Count);
+        Assert.NotNull(response.Value);
+        Assert.Single(response.Value);
         Assert.Contains("ТЕСТ", response.Value.Keys);
         Assert.Equal(3, response.Value["ТЕСТ"].Count);
     }

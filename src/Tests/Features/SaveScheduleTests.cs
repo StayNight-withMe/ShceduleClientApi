@@ -1,8 +1,8 @@
-﻿using Application.Abstraction.DataBase; 
+﻿using Application.Abstraction.DataBase;
 using Application.Features.ScheduleSave;
 using AutoMapper;
 using Contracts.Common;
-using Contracts.Schedules; 
+using Contracts.Schedules;
 using Domain.Common.CustomException;
 using Domain.Model.Entity;
 using Microsoft.Extensions.Logging;
@@ -27,14 +27,14 @@ public class DayScheduleHandlerTests
         _scheduleRepoMock = new Mock<IBaseRepository<DayScheduleEntity>>();
         _lessonRepoMock = new Mock<IBaseRepository<LessonEntity>>();
 
-        
+
         _handler = new ScheduleSaveHandler(
             _loggerMock.Object,
             _scheduleRepoMock.Object,
             _lessonRepoMock.Object,
             _unitOfWorkMock.Object,
             _mapperMock.Object
-           
+
         );
     }
 
@@ -93,16 +93,16 @@ public class DayScheduleHandlerTests
         _mapperMock.Verify(m => m.Map<DayScheduleEntity>(request), Times.Once);
         _mapperMock.Verify(m => m.Map<List<LessonEntity>>(request.Lessons), Times.Once);
 
-        
+
         _scheduleRepoMock.Verify(r => r.AddAsync(
             It.Is<DayScheduleEntity>(e => e.Id == scheduleId && e.GroupName == "П32"),
             It.IsAny<CancellationToken>()), Times.Once);
 
         _lessonRepoMock.Verify(r => r.AddAsync(
-            It.Is<LessonEntity>(l => l.Groupid == scheduleId), 
+            It.Is<LessonEntity>(l => l.Groupid == scheduleId),
             It.IsAny<CancellationToken>()), Times.Once);
 
-        
+
         _unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
     }
 

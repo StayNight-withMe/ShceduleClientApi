@@ -1,7 +1,4 @@
-﻿// Tests/IntegrationTestBase.cs
-using System;
-using System.Threading.Tasks;
-using Application.Abstraction.DataBase;
+﻿using Application.Abstraction.DataBase;
 using Application.Features.AllGroup.Queries;
 using Application.Features.AllTeacher.Queries;
 using Domain.Model.Entity;
@@ -10,7 +7,6 @@ using Infrastructure.DataBase.Repository.Base;
 using Infrastructure.DataBase.Repository.Custom;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
 
 public abstract class IntegrationTestBase : IAsyncLifetime
 {
