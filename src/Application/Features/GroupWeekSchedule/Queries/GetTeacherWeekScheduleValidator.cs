@@ -1,5 +1,4 @@
-﻿
-namespace Application.Features.TeacherSchedule.Queries;
+﻿namespace Application.Features.GroupWeekSchedule.Queries;
 public class GetGroupWeekScheduleValidator
 {
 
