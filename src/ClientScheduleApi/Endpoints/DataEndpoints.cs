@@ -3,6 +3,7 @@ using MediatR;
 using ClientScheduleApi.Extensions.Other;
 using Application.Features.AllGroup.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Domain.Model.ReturnEntity;
 
 namespace ClientScheduleApi.Endpoints;
 
@@ -13,14 +14,21 @@ public static class DataEndpoints
         var group = app
             .MapGroup("/api/data")
             .RequireRateLimiting("DefaultLimiter")
-            .WithTags("Общие данные")
-            .WithDescription("получение общих данных");
+            .WithTags("Общие данные");
 
         group.MapGet("/teachers", GetAllTeachers)
-            .WithTags("Все преподаватели");
+            .WithSummary("Все преподаватели")
+            .WithDescription("Позволяет пользователю получить список всех преподавателей")
+            .WithName("GetAllTeachers")
+            .Produces<List<string>>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests);
 
         group.MapGet("/groups", GetAllGroups)
-            .WithTags("Все группы");
+            .WithSummary("Все группы")
+            .WithDescription("Позволяет пользователю получить список всех специальностей и групп.")
+            .WithName("GetAllGroups")
+            .Produces<Dictionary<string, List<string>>>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests);
 
         return group;
     }
