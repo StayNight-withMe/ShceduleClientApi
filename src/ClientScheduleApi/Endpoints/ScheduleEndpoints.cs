@@ -2,6 +2,7 @@
 using Application.Features.TeacherSchedule.Queries;
 using ClientScheduleApi.Extensions.Other;
 using Contracts.Schedules;
+using Domain.Model.ReturnEntity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,46 +12,55 @@ public static class ScheduleEndpoints
 {
     public static IEndpointRouteBuilder ScheduleService(this IEndpointRouteBuilder builder)
     {
-        var group = builder.MapGroup("Schedule")
+        var group = builder
+            .MapGroup("Schedule")
             .RequireRateLimiting("DefaultLimiter")
-            .WithDescription("Получение расписания");
+            .WithTags("Расписание");
 
         group.MapGet("/teacher/week", GetTeacherWeekSchedule)
-            .WithTags("Расписание преподавателя на след N дней")
-            .Produces<List<DayScheduleDTO>>(200)
-            .Produces(500)
-            .Produces(400)
-            .Produces(429);
+            .WithSummary("Расписание преподавателя на след. N дней")
+            .WithDescription("Позволяет пользователю получить расписание преподавателя на указанное количество дней вперед")
+            .WithName("GetTeacherWeekSchedule")
+            .Produces<List<DayScheduleDTO>>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests)
+            .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError);
 
         group.MapGet("/teacher/day", GetTeacherDaySchedule)
-            .WithTags("Расписания преподавателя на конкретный день")
-            .Produces<DayScheduleDTO>(200)
-            .Produces(500)
-            .Produces(400)
-            .Produces(429);
+            .WithSummary("Расписания преподавателя на конкретный день")
+            .WithDescription("Позволяет пользователю получить расписание преподавателя на конкретный день")
+            .WithName("GetTeacherDaySchedule")
+            .Produces<DayScheduleDTO>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests)
+            .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError);
 
         group.MapGet("/group/day", GetGroupDaySchedule)
-            .WithTags("Расписания группы на конкретный день")
-            .Produces<DayScheduleDTO>(200)
-            .Produces(500)
-            .Produces(400)
-            .Produces(429);
+            .WithSummary("Расписания группы на конкретный день")
+            .WithDescription("Позволяет пользователю получить расписание группы на конкретный день")
+            .WithName("GetGroupDaySchedule")
+            .Produces<DayScheduleDTO>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests)
+            .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError);
 
         group.MapGet("/group/week", GetGroupWeekSchedule)
-            .WithTags("Расписание группы на след N дней")
-            .Produces<List<DayScheduleDTO>>(200)
-            .Produces(500)
-            .Produces(400)
-            .Produces(429);
+            .WithSummary("Расписание группы на след. N дней")
+            .WithDescription("Позволяет пользователю получить расписание группы на указанное количество дней вперед")
+            .WithName("GetGroupWeekSchedule")
+            .Produces<List<DayScheduleDTO>>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests)
+            .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError);
 
         group.MapGet("", GetFullSchedule)
-            .WithTags("Полное расписание на день")
-            .WithSummary("Самаранта")
-            .WithDescription("grwhui")
-            .WithName("Имя")
-            .Produces<List<DayScheduleDTO>>(200)
-            .Produces(500)
-            .Produces(429);
+            .WithSummary("Полное расписание на день")
+            .WithDescription("Позволяет пользователю получить полное расписание на день")
+            .WithName("GetFullSchedule")
+            .Produces<List<DayScheduleDTO>>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .Produces<ErrorResponse>(StatusCodes.Status429TooManyRequests)
+            .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError);
 
         return group;
     }
