@@ -66,7 +66,7 @@ public static class ScheduleEndpoints
     }
 
     public static async Task<IResult> GetTeacherWeekSchedule(
-        [FromServices] Mediator mediatR,
+        [FromServices] IMediator mediatR,
         [AsParameters] GetTeacherWeekScheduleQuery query
     )
     {
@@ -77,7 +77,7 @@ public static class ScheduleEndpoints
 
 
     public static async Task<IResult> GetTeacherDaySchedule(
-        [FromServices] Mediator mediatR,
+        [FromServices] IMediator mediatR,
         [AsParameters] GetTeacherDayScheduleQuery query
     )
     {
@@ -87,7 +87,7 @@ public static class ScheduleEndpoints
     }
 
     public static async Task<IResult> GetGroupDaySchedule(
-        [FromServices] Mediator mediatR,
+        [FromServices] IMediator mediatR,
         [AsParameters] GetGroupDayScheduleQuery query
     )
     {
@@ -97,7 +97,7 @@ public static class ScheduleEndpoints
     }
 
     public static async Task<IResult> GetGroupWeekSchedule(
-        [FromServices] Mediator mediatR,
+        [FromServices] IMediator mediatR,
         [AsParameters] GetGroupWeekScheduleQuery query
     )
     {
@@ -108,7 +108,7 @@ public static class ScheduleEndpoints
 
 
     public static async Task<IResult> GetFullSchedule(
-        [FromServices] Mediator mediatR,
+        [FromServices] IMediator mediatR,
         [AsParameters] GetFullWeekScheduleQuery query
     )
     {

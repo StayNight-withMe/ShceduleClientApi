@@ -4,4 +4,6 @@ using MediatR;
 
 namespace Application.Features.TeacherSchedule.Queries;
 
-public record GetTeacherWeekScheduleQuery(string FullName, DateOnly date) : IRequest<TResult<GetTeacherWeekScheduleDTO>>;
+
+public record GetTeacherWeekScheduleQuery(string FullName, int? DaysCount = null)
+    : IRequest<TResult<GetTeacherWeekScheduleDTO>>;

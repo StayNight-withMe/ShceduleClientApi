@@ -23,7 +23,6 @@ public class GetFullWeekScheduleHandler : IRequestHandler<GetFullWeekScheduleQue
         var spec = new GetFullWeekScheduleSpec(request.date);
         var lessons = await _repository.ListAsync(spec, cancellationToken);
 
-        // 2. Группируем занятия по группам
         var schedules = lessons
             .GroupBy(l => l.daySchedule.GroupName)
             .Select(g => new DayScheduleDTO
