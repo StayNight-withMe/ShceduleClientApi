@@ -1,5 +1,7 @@
 *.Development.json
 
+*.lscache
+
 # User-specific files
 *.rsuser
 *.suo
